@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./page.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="btn"></div>
+  <script>
+    document.getElementById('btn').onclick = load
+
+    function load() {
+      console.time()
+
+      let params1 = 'leetcode'
+
+      let data = fn2(params1)
+
+      console.timeEnd()
+      console.log('-- 返回值 -->', data)
+      console.log('-- 参  数 -->', params1)
+    }
+
+    function fn1(s) {
+      let arr = s.split('')
+      let map = {}
+      for (let i in arr) {
+        map[arr[i]] ? map[arr[i]][0]++ : (map[arr[i]] = [1, i])
+      }
+      for (let key in map) {
+        if (map[key][0] === 1) return ~~map[key][1]
+      }
+      return -1
+    };
+
+    function fn2(s) {
+      const map = new Map()
+      const q = []
+      const n = s.length
+
+      for(let [i, v] of Array.from(s).entries()) {
+        if(!map.has(v)) {
+          // 初始化状态
+          map.set(v, i)
+          q.push([s[i], i])
+        } else {
+          // 对应的值在map里为-1
+          map.set(v, -1)
+          // while循环 删除队列首位 是重复的
+          while(q.length && map.get( q[0][0] ) === -1) {
+            q.shift()
+          }
+        }
+      }
+      return q.length ? q[0][1] : -1
+    };
+  </script>
+
+  <!-- 
+    字符串中的第一个唯一字符
+    给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
+
+     
+
+    示例：
+
+    s = "leetcode"
+    返回 0
+
+    s = "loveleetcode"
+    返回 2
+     
+
+    提示：你可以假定该字符串只包含小写字母。
+
+    作者：力扣 (LeetCode)
+    链接：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/xn5z8r/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+   -->
+</body>
+
+</html>

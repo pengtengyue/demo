@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./page.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="btn"></div>
+  <script>
+    document.getElementById('btn').onclick = load
+
+    function load() {
+      let params1 = [
+        [5, 1, 9, 11, 17],
+        [2, 4, 8, 10, 18],
+        [13, 3, 6, 7, 19],
+        [15, 14, 12, 16, 20],
+        [21, 22, 23, 24, 25],
+      ]
+      // let params1 = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
+
+      let data = fn2(params1)
+
+      console.log('-- 返回值 -->', data)
+      console.log('-- 参  数 -->', params1)
+    }
+
+    function fn1(matrix) {
+      let n = matrix.length
+      let arr = new Array(n).fill(0).map(v => new Array(n))
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+          arr[j][(n - i - 1)] = matrix[i][j]
+        }
+      }
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+          matrix[i][j] = arr[i][j]
+        }
+      }
+    };
+
+    function fn2(matrix) {
+      const n = matrix.length;
+      for (let i = 0; i < Math.floor(n / 2); ++i) {
+        for (let j = 0; j < Math.floor((n + 1) / 2); ++j) {
+          const temp = matrix[i][j];
+          matrix[i][j] = matrix[n - j - 1][i];
+          matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];
+          matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];
+          matrix[j][n - i - 1] = temp;
+
+          console.log('----',temp)
+          console.log(i, j)
+          console.log(n - j - 1, i)
+          console.log(n - i - 1, n - j - 1)
+          console.log(j, n - i - 1)
+        }
+      }
+    };
+  </script>
+
+  <!-- 
+    旋转图像
+    给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。
+
+    你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。
+
+    作者：力扣 (LeetCode)
+    链接：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/xnhhkv/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+   -->
+</body>
+
+</html>
