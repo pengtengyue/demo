@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./page.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="btn"></div>
+  <script>
+    document.getElementById('btn').onclick = load
+
+    function load() {
+      console.time()
+
+      let params1 = 'A man, a plan, a canal: Panama'
+
+      let data = fn2(params1)
+
+      console.timeEnd()
+      console.log('-- 返回值 -->', data)
+      console.log('-- 参  数 -->', params1)
+    }
+
+    function fn1(s) {
+      let newStr = ''
+      for (let i = 0; i < s.length; i++) {
+        const element = s[i];
+        if (/^[A-Za-z0-9]+$/.test(element)) newStr += element.toLowerCase()
+      }
+      return newStr === newStr.split('').reverse().join('')
+    };
+
+    function fn2(s) {
+      let newStrArr = s.toLowerCase().match(/[a-z0-9]+/g)
+      if (!newStrArr) return true
+      let newStr = newStrArr.join('')
+      let p1 = 0,
+        p2 = newStr.length - 1;
+      while (p1 < p2) {
+        if (newStr[p1] === newStr[p2]) {
+          p1++
+          p2--
+        } else return false
+      }
+      return true
+    };
+  </script>
+
+  <!-- 
+    验证回文串
+    给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+
+    说明：本题中，我们将空字符串定义为有效的回文串。
+
+     
+
+    示例 1:
+
+    输入: "A man, a plan, a canal: Panama"
+    输出: true
+    解释："amanaplanacanalpanama" 是回文串
+    示例 2:
+
+    输入: "race a car"
+    输出: false
+    解释："raceacar" 不是回文串
+
+    作者：力扣 (LeetCode)
+    链接：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/xne8id/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+   -->
+</body>
+
+</html>
