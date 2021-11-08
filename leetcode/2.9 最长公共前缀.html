@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./page.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="btn"></div>
+  <script>
+    document.getElementById('btn').onclick = load
+
+    function load() {
+      console.time()
+
+      let params1 = ["ab", "a"]
+
+      let data = fn1(params1)
+
+      console.timeEnd()
+      console.log('-- 返回值 -->', data)
+      console.log('-- 参  数 -->', params1)
+    }
+
+    function fn1(strs) {
+      if (strs.length === 0) return ""
+      // 初始值
+      let initValue = strs[0]
+      for (let i = 1; i < strs.length; i++) {
+
+        let j = 0
+        for (; j < strs[i].length; j++) {
+          if (initValue[j] !== strs[i][j]) break
+        }
+        initValue = initValue.substr(0, j)
+        // console.log(initValue,j)
+        if(initValue === '') return initValue
+      }
+      return initValue
+    };
+
+    function fn2(n) {
+      
+    }
+  </script>
+
+  <!-- 
+    最长公共前缀
+    编写一个函数来查找字符串数组中的最长公共前缀。
+
+    如果不存在公共前缀，返回空字符串 ""。
+
+     
+
+    示例 1：
+
+    输入：strs = ["flower","flow","flight"]
+    输出："fl"
+    示例 2：
+
+    输入：strs = ["dog","racecar","car"]
+    输出：""
+    解释：输入不存在公共前缀。
+     
+
+    提示：
+
+    1 <= strs.length <= 200
+    0 <= strs[i].length <= 200
+    strs[i] 仅由小写英文字母组成
+
+    作者：力扣 (LeetCode)
+    链接：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/xnmav1/
+    来源：力扣（LeetCode）
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+   -->
+</body>
+
+</html>
